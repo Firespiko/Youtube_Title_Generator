@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Generator</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 30px; /* Increased horizontal padding */
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px; /* Add space above the button */
+            border: 2px solid #fff; /* Add white border */
+            border-radius: 5px; /* Add border radius */
+            margin-left: -100px; 
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        select {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px; /* Increased horizontal padding */
+            font-size: 16px;
+            border: 2px solid #fff; /* Add white border */
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 5px; /* Add border radius */
+        }
+
+        .dropdown-container {
+            display: inline-block; /* Display side by side */
+            margin-right: 20px; /* Add space between dropdowns */
+        }
+
+        #output {
+            margin-top: 40px; /* Add space between button and message */
+            text-align: left;
+        }
+
+        .text {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>YouTube Thumbnail Generator</h1>
+    <form id="myForm">
+        <div class="dropdown-container">
+            <p class="text">No of titles:</p>
+            <select name="dropdown1" id="dropdown1">
+                <option value="">Select Number</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+            </select>
+        </div>
+        <div class="dropdown-container">
+            <p class="text">Niche:</p>
+            <select name="dropdown2" id="dropdown2">
+                <option value="">Select Niche</option>
+                <option value="Freelancing">Freelancing</option>
+                <option value="Content Creation">Content Creation</option>
+                <option value="E-commerce">E-commerce</option>
+                <option value="Affiliate Marketing">Affiliate Marketing</option>
+                <option value="Online Courses">Online Courses</option>
+                <option value="Social Media Management">Social Media Management</option>
+                <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
+                <option value="Pay-Per-Click (PPC) Advertising">Pay-Per-Click (PPC) Advertising</option>
+                <option value="Email Marketing">Email Marketing</option>
+                <option value="Webinars and Online Events">Webinars and Online Events</option>
+                <option value="Community Management">Community Management</option>
+                <option value="Virtual Assistant Services">Virtual Assistant Services</option>
+                <option value="Data Entry">Data Entry</option>
+                <option value="Online Tutoring">Online Tutoring</option>
+                <option value="Translation and Interpretation">Translation and Interpretation</option>
+                <option value="Microstock Photography and Videography">Microstock Photography and Videography</option>
+                <option value="App Development">App Development</option>
+                <option value="Game Development">Game Development</option>
+                <option value="Music Production">Music Production</option>
+                <option value="Graphic Design">Graphic Design</option>
+                <option value="Stock Market Investing">Stock Market Investing</option>
+                <option value="Cryptocurrency Investing">Cryptocurrency Investing</option>
+                <option value="Real Estate Investing">Real Estate Investing</option>
+                <option value="Personal Finance">Personal Finance</option>
+                <option value="Passive Income">Passive Income</option>
+                <option value="Side Hustles">Side Hustles</option>
+                <option value="Financial Independence">Financial Independence</option>
+                <option value="Retirement Planning">Retirement Planning</option>
+                <option value="Student Loan Debt">Student Loan Debt</option>
+                <option value="Credit Cards">Credit Cards</option>
+                <option value="Investing for Beginners">Investing for Beginners</option>
+                <option value="Dividend Investing">Dividend Investing</option>
+                <option value="Value Investing">Value Investing</option>
+                <option value="Growth Investing">Growth Investing</option>
+                <option value="Technical Analysis">Technical Analysis</option>
+                <option value="Options Trading">Options Trading</option>
+                <option value="Day Trading">Day Trading</option>
+                <option value="Swing Trading">Swing Trading</option>
+                <option value="Robo-Advisors">Robo-Advisors</option>
+                <option value="Socially Responsible Investing">Socially Responsible Investing</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit">Generate</button>
+    </form>
+    <div id="output"></div>
+</div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        var form = this;
+        var formData = new FormData(form);
+
+        // Send form data using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Parse the JSON response
+                var response = JSON.parse(xhr.responseText);
+                
+                // Update the page with the response
+                document.getElementById('output').innerHTML = "";
+                response.titles.forEach(function(title) {
+                    document.getElementById('output').innerHTML += title + "<br>";
+                });
+            }
+        };
+        xhr.send(new URLSearchParams(formData)); // Send form data as URL-encoded string
+    });
+</script>
+
+
+</body>
+</html>
